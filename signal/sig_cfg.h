@@ -49,5 +49,5 @@ extern uint8_t sig_red_light;
 
 //Stm32l4xx application
 extern uint8_t sig_light;
-
+extern uint8_t sig_pedestrian_request;
 #endif /* SIGNAL_SIG_CFG_H_ */

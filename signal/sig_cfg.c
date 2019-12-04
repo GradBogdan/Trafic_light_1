@@ -18,6 +18,7 @@ uint8_t sig_red_light;
 //Stm32l4xx application
 
 uint8_t sig_light;
+uint8_t sig_pedestrian_request;
 
 
 

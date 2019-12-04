@@ -31,10 +31,17 @@
 #include <sys_timer.h>
 #include <sys_button.h>
 
+#include <std_types.h>
+
+#include <sig_cfg.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+typedef enum{
+	RED, YELLOW, GREEN
+}trafficLightState_t;
 
 /* USER CODE END PTD */
 
@@ -260,8 +267,52 @@ void Task_15ms(void) {
 void Task_500ms(void) {
 
 };
-void Task_1000ms(void) {
-
+void CarTrafficLight_Task_1000ms(void) {
+	static uint8_t CL_count;//time in seconds
+	static trafficLightState_t CL_state;
+	if(sig_pedestrian_request == STD_HIGH){
+		CL_state= RED;
+		CL_count= 0;
+		sig_pedestrian_request = STD_LOW;
+	};
+	switch(CL_state){
+				case RED :
+					if (CL_count <=5) {
+						HAL_GPIO_WritePin(GPIOC, RED_LIGHT_LED_Pin, GPIO_PIN_SET);//set Red LED
+						CL_count = CL_count+1;
+					}
+					else {
+						CL_state = YELLOW;
+						CL_count =0;
+						HAL_GPIO_WritePin(GPIOC, RED_LIGHT_LED_Pin, GPIO_PIN_RESET);//reset Red LED
+					}
+					break;
+				case YELLOW :
+					if (CL_count <=2) {
+						HAL_GPIO_WritePin(GPIOC, YELLOW_LIGHT_LED_Pin, GPIO_PIN_SET);//set Yellow LED
+						CL_count = CL_count+1;
+						}
+					else {
+						CL_state = GREEN;
+						CL_count =0;
+						HAL_GPIO_WritePin(GPIOC, YELLOW_LIGHT_LED_Pin, GPIO_PIN_RESET);//reset Yellow LED
+							}
+					break;
+				case GREEN :
+					if (CL_count <=5) {
+						HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin, GPIO_PIN_SET);//set Green LED
+						CL_count = CL_count+1;
+						}
+					else {
+						CL_state = RED;
+						CL_count =0;
+						HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin, GPIO_PIN_RESET);//reset Green LED
+						}
+					break;
+				default :
+					CL_state = RED;
+					break;
+	};
 };
 
 

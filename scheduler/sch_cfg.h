@@ -11,7 +11,7 @@
 
 extern Sch_Cfg_Type Sch_Cfg;
 
-void Task_1000ms(void);
+void CarTrafficLight_Task_1000ms(void);
 void Task_500ms(void);
 void Task_10ms(void);
 void Task_15ms(void);
