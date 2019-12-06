@@ -1,3 +1,4 @@
+"CarLight/stm32_gcc/CarLight.o"
 "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o"
 "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o"
 "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o"

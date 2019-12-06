@@ -16,6 +16,7 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+CarLight/stm32_gcc \
 Drivers/STM32L4xx_HAL_Driver/Src \
 Src \
 Startup \

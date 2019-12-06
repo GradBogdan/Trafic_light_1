@@ -35,13 +35,12 @@
 
 #include <sig_cfg.h>
 
+#include <CarLight.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-typedef enum{
-	RED, YELLOW, GREEN
-}trafficLightState_t;
 
 /* USER CODE END PTD */
 
@@ -268,50 +267,63 @@ void Task_500ms(void) {
 
 };
 void CarTrafficLight_Task_1000ms(void) {
-	static uint8_t CL_count;//time in seconds
-	static trafficLightState_t CL_state;
-	if(sig_pedestrian_request == STD_HIGH){
-		CL_state= RED;
-		CL_count= 0;
+	static uint8_t CL_state_count;//time in seconds spent in each state
+	static uint8_t CL_cycle_count;//time in sescond for one traffic light cycle (red->yellow->green)
+	CL_cycle_count++;
+	if(sig_pedestrian_request == STD_HIGH && CL_cycle_count >=20){
+		CL_state = CL_RED;
+		CL_state_count= 0;
+		CL_cycle_count = 0;
 		sig_pedestrian_request = STD_LOW;
 	};
 	switch(CL_state){
-				case RED :
-					if (CL_count <=5) {
-						HAL_GPIO_WritePin(GPIOC, RED_LIGHT_LED_Pin, GPIO_PIN_SET);//set Red LED
-						CL_count = CL_count+1;
-					}
-					else {
-						CL_state = YELLOW;
-						CL_count =0;
-						HAL_GPIO_WritePin(GPIOC, RED_LIGHT_LED_Pin, GPIO_PIN_RESET);//reset Red LED
-					}
-					break;
-				case YELLOW :
-					if (CL_count <=2) {
-						HAL_GPIO_WritePin(GPIOC, YELLOW_LIGHT_LED_Pin, GPIO_PIN_SET);//set Yellow LED
-						CL_count = CL_count+1;
-						}
-					else {
-						CL_state = GREEN;
-						CL_count =0;
-						HAL_GPIO_WritePin(GPIOC, YELLOW_LIGHT_LED_Pin, GPIO_PIN_RESET);//reset Yellow LED
-							}
-					break;
-				case GREEN :
-					if (CL_count <=5) {
-						HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin, GPIO_PIN_SET);//set Green LED
-						CL_count = CL_count+1;
-						}
-					else {
-						CL_state = RED;
-						CL_count =0;
-						HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin, GPIO_PIN_RESET);//reset Green LED
-						}
-					break;
-				default :
-					CL_state = RED;
-					break;
+		case CL_RED :
+			if (CL_state_count <=5) {
+				CL_SetLightColor(CL_state);
+				CL_state_count = CL_state_count+1;
+			}
+			else {
+				CL_state = CL_FLASH_RED;
+				CL_state_count =0;
+			}
+			break;
+		case CL_FLASH_RED :
+			if(CL_state_count <=3) {
+				CL_SetLightColor(CL_state);
+				CL_state_count = CL_state_count+1;
+			}
+			else {
+				CL_state = CL_YELLOW;
+				CL_state_count =0;
+			}
+			break;
+		case CL_YELLOW :
+			if (CL_state_count <=2) {
+				CL_SetLightColor(CL_state);
+				CL_state_count = CL_state_count+1;
+			}
+			else {
+				CL_state = CL_GREEN;
+				CL_state_count =0;
+			}
+			break;
+		case CL_GREEN :
+			if (CL_state_count <=5) {
+				CL_SetLightColor(CL_state);
+				CL_state_count = CL_state_count+1;
+			}
+			else {
+				CL_state = CL_DEFAULT_GREEN;
+				CL_state_count =0;
+			}
+			break;
+		case CL_DEFAULT_GREEN :
+				CL_SetLightColor(CL_state);
+			break;
+
+		default :
+			CL_state = CL_DEFAULT_GREEN;
+			break;
 	};
 };
 
