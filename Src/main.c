@@ -223,10 +223,13 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GREED_LED_GPIO_Port, GREED_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GREED_LED_Pin|PED_GREEN_LED_Pin|PED_RED_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin|YELLOW_LIGHT_LED_Pin|RED_LIGHT_LED_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(PED_REQUEST_LED_GPIO_Port, PED_REQUEST_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : BLUE_BUTTON_Pin */
   GPIO_InitStruct.Pin = BLUE_BUTTON_Pin;
@@ -234,12 +237,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(BLUE_BUTTON_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : GREED_LED_Pin */
-  GPIO_InitStruct.Pin = GREED_LED_Pin;
+  /*Configure GPIO pins : GREED_LED_Pin PED_GREEN_LED_Pin PED_RED_LED_Pin */
+  GPIO_InitStruct.Pin = GREED_LED_Pin|PED_GREEN_LED_Pin|PED_RED_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GREED_LED_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : GREEN_LIGHT_LED_Pin YELLOW_LIGHT_LED_Pin RED_LIGHT_LED_Pin */
   GPIO_InitStruct.Pin = GREEN_LIGHT_LED_Pin|YELLOW_LIGHT_LED_Pin|RED_LIGHT_LED_Pin;
@@ -247,6 +250,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PED_REQUEST_LED_Pin */
+  GPIO_InitStruct.Pin = PED_REQUEST_LED_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(PED_REQUEST_LED_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 1, 0);
@@ -263,9 +273,13 @@ void Task_15ms(void) {
 
 };
 
-void Task_500ms(void) {
+void PedestrianLight_Task_500ms(void) {
+	if(sig_pedestrian_request == STD_HIGH){
+		HAL_GPIO_TogglePin(GPIOB, PED_REQUEST_LED_Pin);
+	};
 
 };
+
 void CarTrafficLight_Task_1000ms(void) {
 	static uint8_t CL_state_count;//time in seconds spent in each state
 	static uint8_t CL_cycle_count;//time in sescond for one traffic light cycle (red->yellow->green)

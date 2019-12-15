@@ -22,8 +22,8 @@ static Sch_Task_Type tasks[] = {
     },
 	{
 		500,		//interval in milliseconds
-		0,			 // offset: set equal to interval so the task is called on the first recurrence milliseconds
-		Task_500ms		//Task container; implement in your application
+		13,			 // offset: set equal to interval so the task is called on the first recurrence milliseconds
+		PedestrianLight_Task_500ms		//Task container; implement in your application
 	},
 	{
 		1000, 		//interval in milliseconds
