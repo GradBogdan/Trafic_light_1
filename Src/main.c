@@ -276,15 +276,17 @@ void Task_15ms(void) {
 void PedestrianLight_Task_500ms(void) {
 	if(sig_pedestrian_request == STD_HIGH){
 		HAL_GPIO_TogglePin(GPIOB, PED_REQUEST_LED_Pin);
-	};
-
+	}
+	else {
+		HAL_GPIO_WritePin(GPIOB, PED_REQUEST_LED_Pin, GPIO_PIN_RESET);
+	}
 };
 
 void CarTrafficLight_Task_1000ms(void) {
 	static uint8_t CL_state_count;//time in seconds spent in each state
 	static uint8_t CL_cycle_count;//time in sescond for one traffic light cycle (red->yellow->green)
 	CL_cycle_count++;
-	if(sig_pedestrian_request == STD_HIGH && CL_cycle_count >=20){
+	if(sig_pedestrian_request == STD_HIGH && CL_cycle_count >=40){
 		CL_state = CL_RED;
 		CL_state_count= 0;
 		CL_cycle_count = 0;
@@ -333,6 +335,7 @@ void CarTrafficLight_Task_1000ms(void) {
 			break;
 		case CL_DEFAULT_GREEN :
 				CL_SetLightColor(CL_state);
+
 			break;
 
 		default :
