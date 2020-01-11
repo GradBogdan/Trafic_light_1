@@ -18,6 +18,7 @@ C_DEPS :=
 SUBDIRS := \
 CarLight/stm32_gcc \
 Drivers/STM32L4xx_HAL_Driver/Src \
+OLED_SSD1306_Driver \
 Src \
 Startup \
 scheduler \

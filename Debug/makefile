@@ -13,6 +13,7 @@ RM := rm -rf
 -include scheduler/subdir.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
+-include OLED_SSD1306_Driver/subdir.mk
 -include Drivers/STM32L4xx_HAL_Driver/Src/subdir.mk
 -include CarLight/stm32_gcc/subdir.mk
 -include subdir.mk

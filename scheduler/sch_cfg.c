@@ -16,7 +16,7 @@ static Sch_Task_Type tasks[] = {
         Task_10ms  //Task container; implement in your application
     },
     {
-        15,          //interval in milliseconds
+        200,          //interval in milliseconds
         0,           // offset: set equal to interval so the task is called on the first recurrence milliseconds
         Task_15ms  //Task container; implement in your application
     },
