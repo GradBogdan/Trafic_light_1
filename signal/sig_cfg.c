@@ -19,7 +19,7 @@ uint8_t sig_red_light;
 
 uint8_t sig_light;
 uint8_t sig_pedestrian_request;
-
+uint8_t sig_ped_green;
 
 
 

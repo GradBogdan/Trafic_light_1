@@ -21,6 +21,7 @@
 "OLED_SSD1306_Driver/fonts.o"
 "OLED_SSD1306_Driver/ssd1306.o"
 "OLED_SSD1306_Driver/test.o"
+"PedestrianAnimationBitMap/PedestrianAnimation.o"
 "Src/main.o"
 "Src/stm32l4xx_hal_msp.o"
 "Src/stm32l4xx_it.o"

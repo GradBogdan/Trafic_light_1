@@ -22,7 +22,9 @@
 #define SIG_GET_LIGHT sig_light
 #define SIG_SET_LIGHT(value) {sig_light = value;}
 
-
+//Stm32l4xx application
+#define SIG_GET_PED_GREEN sig_ped_green
+#define SIG_SET_PED_GREEN(value) {sig_ped_green = value;}
 
 //DIO
 #define SIG_GET_YYY Dio_ReadChannel(YYY)
@@ -50,4 +52,5 @@ extern uint8_t sig_red_light;
 //Stm32l4xx application
 extern uint8_t sig_light;
 extern uint8_t sig_pedestrian_request;
+extern uint8_t sig_ped_green;
 #endif /* SIGNAL_SIG_CFG_H_ */

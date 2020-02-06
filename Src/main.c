@@ -39,9 +39,8 @@
 
 #include <ssd1306.h>
 
-#include <Ped_Animation_Bitmaps.h>
+#include <PedestrianAnimation.h>
 
-#include <test.h>
 
 /* USER CODE END Includes */
 
@@ -329,21 +328,14 @@ void Task_10ms(void) {
 
 };
 
-void Task_15ms(void) {
-	SSD1306_Clear();
-	SSD1306_DrawBitmap(0, 0, pedestrian_crossing, 128, 64, 1);
-//	SSD1306_GotoXY(0,0);
-//	SSD1306_Puts("CROSS", &Font_11x18, 1);
-	SSD1306_UpdateScreen();
-
-//	SSD1306_Clear();
-//	SSD1306_DrawBitmap(0, 0, pedestrian_crossing_frame_3, 95, 64, 1);
-//	SSD1306_UpdateScreen();
-//
-//	SSD1306_Clear();
-//	SSD1306_DrawBitmap(0, 0, pedestrian_crossing_frame_4, 128, 64, 1);
-//	SSD1306_UpdateScreen();
-};
+void PedWalkingAnimation_200ms(void) {
+	if (sig_ped_green == STD_HIGH){
+		PA_SetPedWalking();
+	}
+	else {
+		PA_SetPedStand();
+	}
+}
 
 void PedestrianLight_Task_500ms(void) {
 	if(sig_pedestrian_request == STD_HIGH){
@@ -359,7 +351,7 @@ void CarTrafficLight_Task_1000ms(void) {
 	static uint8_t CL_cycle_count;//time in sescond for one traffic light cycle (red->yellow->green)
 	CL_cycle_count++;
 	if(sig_pedestrian_request == STD_HIGH && CL_cycle_count >=40){
-		CL_state = CL_RED;
+		CL_state = CL_YELLOW;
 		CL_state_count= 0;
 		CL_cycle_count = 0;
 		sig_pedestrian_request = STD_LOW;
@@ -369,6 +361,7 @@ void CarTrafficLight_Task_1000ms(void) {
 			if (CL_state_count <=5) {
 				CL_SetLightColor(CL_state);
 				CL_state_count = CL_state_count+1;
+				SIG_SET_PED_GREEN(STD_HIGH);
 			}
 			else {
 				CL_state = CL_FLASH_RED;
@@ -381,7 +374,7 @@ void CarTrafficLight_Task_1000ms(void) {
 				CL_state_count = CL_state_count+1;
 			}
 			else {
-				CL_state = CL_YELLOW;
+				CL_state = CL_GREEN;
 				CL_state_count =0;
 			}
 			break;
@@ -391,7 +384,7 @@ void CarTrafficLight_Task_1000ms(void) {
 				CL_state_count = CL_state_count+1;
 			}
 			else {
-				CL_state = CL_GREEN;
+				CL_state = CL_RED;
 				CL_state_count =0;
 			}
 			break;
@@ -399,6 +392,7 @@ void CarTrafficLight_Task_1000ms(void) {
 			if (CL_state_count <=5) {
 				CL_SetLightColor(CL_state);
 				CL_state_count = CL_state_count+1;
+				SIG_SET_PED_GREEN(STD_LOW);
 			}
 			else {
 				CL_state = CL_DEFAULT_GREEN;
@@ -407,6 +401,7 @@ void CarTrafficLight_Task_1000ms(void) {
 			break;
 		case CL_DEFAULT_GREEN :
 				CL_SetLightColor(CL_state);
+				SIG_SET_PED_GREEN(STD_LOW);
 
 			break;
 

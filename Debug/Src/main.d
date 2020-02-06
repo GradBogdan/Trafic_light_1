@@ -38,8 +38,7 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
  D:/prj/CubeIDE_ws/Traffic_Light_1/CarLight/CarLight.h \
  D:/prj/CubeIDE_ws/Traffic_Light_1/OLED_SSD1306_Driver/ssd1306.h \
  D:/prj/CubeIDE_ws/Traffic_Light_1/OLED_SSD1306_Driver/fonts.h \
- D:/prj/CubeIDE_ws/Traffic_Light_1/PedestrianAnimationBitMap/Ped_Animation_Bitmaps.h \
- D:/prj/CubeIDE_ws/Traffic_Light_1/OLED_SSD1306_Driver/test.h
+ D:/prj/CubeIDE_ws/Traffic_Light_1/PedestrianAnimationBitMap/PedestrianAnimation.h
 
 ../Inc/main.h:
 
@@ -121,6 +120,4 @@ D:/prj/CubeIDE_ws/Traffic_Light_1/OLED_SSD1306_Driver/ssd1306.h:
 
 D:/prj/CubeIDE_ws/Traffic_Light_1/OLED_SSD1306_Driver/fonts.h:
 
-D:/prj/CubeIDE_ws/Traffic_Light_1/PedestrianAnimationBitMap/Ped_Animation_Bitmaps.h:
-
-D:/prj/CubeIDE_ws/Traffic_Light_1/OLED_SSD1306_Driver/test.h:
+D:/prj/CubeIDE_ws/Traffic_Light_1/PedestrianAnimationBitMap/PedestrianAnimation.h:

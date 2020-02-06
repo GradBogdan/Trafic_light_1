@@ -18,7 +18,7 @@ static Sch_Task_Type tasks[] = {
     {
         200,          //interval in milliseconds
         0,           // offset: set equal to interval so the task is called on the first recurrence milliseconds
-        Task_15ms  //Task container; implement in your application
+        PedWalkingAnimation_200ms  //Task container; implement in your application
     },
 	{
 		500,		//interval in milliseconds
