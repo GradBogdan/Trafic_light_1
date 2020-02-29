@@ -8,11 +8,9 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include system/stm32_gcc/subdir.mk
--include signal/subdir.mk
--include scheduler/subdir.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
+-include PelicanCrossing/subdir.mk
 -include PedestrianAnimationBitMap/subdir.mk
 -include OLED_SSD1306_Driver/subdir.mk
 -include Drivers/STM32L4xx_HAL_Driver/Src/subdir.mk

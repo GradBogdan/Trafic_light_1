@@ -1,2 +1,0 @@
-sys_button.c:13:6:Sys_ISRButtonInit	8	static
-sys_button.c:30:6:Sys_ISRButtonHandler	4	static

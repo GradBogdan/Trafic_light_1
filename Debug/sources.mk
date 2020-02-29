@@ -20,9 +20,7 @@ CarLight/stm32_gcc \
 Drivers/STM32L4xx_HAL_Driver/Src \
 OLED_SSD1306_Driver \
 PedestrianAnimationBitMap \
+PelicanCrossing \
 Src \
 Startup \
-scheduler \
-signal \
-system/stm32_gcc \
 
