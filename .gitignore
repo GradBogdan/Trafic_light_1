@@ -1,10 +1,7 @@
-/*.cmake
-/*.DS_Store
-/.user
-/build
-.xml
-/Debug
-.setting
+
+Build
+Debug
+
 
 # C++ gitignore
 
