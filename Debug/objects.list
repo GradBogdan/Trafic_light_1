@@ -30,3 +30,5 @@
 "Src/sysmem.o"
 "Src/system_stm32l4xx.o"
 "Startup/startup_stm32l476rgtx.o"
+"system/stm32_gcc/sys_button.o"
+"system/stm32_gcc/sys_timer.o"

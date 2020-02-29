@@ -7,7 +7,7 @@
 
 #ifndef SYS_TIMER_H_
 #define SYS_TIMER_H_
-#include <std_types.h>
+
 
 /* initializes a timer
  */

@@ -23,4 +23,5 @@ PedestrianAnimationBitMap \
 PelicanCrossing \
 Src \
 Startup \
+system/stm32_gcc \
 
