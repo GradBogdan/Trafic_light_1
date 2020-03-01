@@ -13,6 +13,7 @@
 #define SIG_SET(name, value) SIG_SET_##name(value)
 #define SIG_GET(name) SIG_GET_##name
 
+
 /**** Code usage
  #include "sig.h"
  ................
@@ -24,7 +25,7 @@
  if (SIG_GET(RED_BUTTON) == STD_HIGH)
 	 
 Getting the global variable (the generic signal to read it in other modules)
-SIG_GET(RED_LIGHT) =>	 SIG_GET_RED_BUTTON =>
+SIG_GET(RED_LIGHT) =>	 SIG_GET_RED_LIGHT =>
 => SIG_GET_RED_LIGHT => sig_red_light
 
 Setting the global variable (the generic signal to read it in other modules)

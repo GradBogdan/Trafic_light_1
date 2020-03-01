@@ -22,9 +22,40 @@
 #define SIG_GET_LIGHT sig_light
 #define SIG_SET_LIGHT(value) {sig_light = value;}
 
-//Stm32l4xx application
+//Start of Stm32l4xx application signals
+//Car signals
+#define SIG_GET_CAR_RED sig_car_red
+#define SIG_SET_CAR_RED(value) {sig_car_red = value;}
+
+#define SIG_GET_CAR_YELLOW sig_car_yellow
+#define SIG_SET_CAR_YELLOW(value) {sig_car_yellow = value;}
+
+#define SIG_GET_CAR_GREEN sig_car_green
+#define SIG_SET_CAR_GREEN(value) {sig_car_green = value;}
+
+//Pedestrian signals
+#define SIG_GET_PEDESTRIAN_GREEN sig_pedestrian_green
+#define SIG_SET_PEDESTRIAN_GREEN(value) {sig_pedestrian_green = value;}
+
+#define SIG_GET_PEDESTRIAN_RED sig_pedestrian_red
+#define SIG_SET_PEDESTRIAN_RED(value) {sig_pedestrian_red = value;}
+
+#define SIG_GET_PEDESTRIAN_REQUEST sig_pedestrian_request
+#define SIG_SET_PEDESTRIAN_REQUEST(value) {sig_pedestrian_request = value;}
+
+#define SIG_GET_PEDESTRIAN_ANIMATION sig_pedestrian_animation
+#define SIG_SET_PEDESTRIAN_ANIMATION(value) {sig_pedestrian_animation = value;)
+
+#define SIG_GET_PEDESTRIAN_SPEAKER sig_pedestrian_speaker
+#define SIG_SET_PEDESTRIAN_SPEAKER(value) { sig_pedestrian_speaker = value;)
+
+//end of Stm32l4xx application signals
+
 #define SIG_GET_PED_GREEN sig_ped_green
 #define SIG_SET_PED_GREEN(value) {sig_ped_green = value;}
+
+
+
 
 //DIO
 #define SIG_GET_YYY Dio_ReadChannel(YYY)
@@ -50,7 +81,15 @@ extern uint16_t sig_xxx;
 extern uint8_t sig_red_light;
 
 //Stm32l4xx application
-extern uint8_t sig_light;
+extern uint8_t sig_car_red;
+extern uint8_t sig_car_yellow;
+extern uint8_t sig_car_green;
+extern uint8_t sig_pedestrian_green;
+extern uint8_t sig_pedestrian_red;
+extern uint8_t sig_pedestrian_animation;
+extern uint8_t sig_pedestrian_speaker;
+
+
 extern uint8_t sig_pedestrian_request;
 extern uint8_t sig_ped_green;
 #endif /* SIGNAL_SIG_CFG_H_ */

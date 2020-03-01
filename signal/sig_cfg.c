@@ -16,8 +16,15 @@ uint8_t sig_red_light;
 
 
 //Stm32l4xx application
+uint8_t sig_car_red;
+uint8_t sig_car_yellow;
+uint8_t sig_car_green;
+uint8_t sig_pedestrian_green;
+uint8_t sig_pedestrian_red;
+uint8_t sig_pedestrian_animation;
+uint8_t sig_pedestrian_speaker;
 
-uint8_t sig_light;
+
 uint8_t sig_pedestrian_request;
 uint8_t sig_ped_green;
 
