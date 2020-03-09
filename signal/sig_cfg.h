@@ -5,6 +5,7 @@
  *      Author: Pati
  */
 #include <std_types.h>
+#include "stm32l4xx_hal.h"
 
 #ifndef SIGNAL_SIG_CFG_H_
 #define SIGNAL_SIG_CFG_H_
@@ -24,14 +25,20 @@
 
 //Start of Stm32l4xx application signals
 //Car signals
-#define SIG_GET_CAR_RED sig_car_red
-#define SIG_SET_CAR_RED(value) {sig_car_red = value;}
+#define SIG_GET_CAR_RED HAL_GPIO_ReadPin(GPIOC, RED_LIGHT_LED_Pin)
+#define SIG_SET_CAR_RED HAL_GPIO_WritePin(GPIOC, RED_LIGHT_LED_Pin, GPIO_PIN_SET)
+#define SIG_RESET_CAR_RED HAL_GPIO_WritePin(GPIOC, RED_LIGHT_LED_Pin, GPIO_PIN_RESET)
+#define SIG_TOGGLE_CAR_RED HAL_GPIO_TogglePin(GPIOC, RED_LIGHT_LED_Pin)
 
-#define SIG_GET_CAR_YELLOW sig_car_yellow
-#define SIG_SET_CAR_YELLOW(value) {sig_car_yellow = value;}
+#define SIG_GET_CAR_YELLOW HAL_GPIO_ReadPin(GPIOC, YELLOW_LIGHT_LED_Pin)
+#define SIG_SET_CAR_YELLOW HAL_GPIO_WritePin(GPIOC, YELLOW_LIGHT_LED_Pin, GPIO_PIN_SET)
+#define SIG_RESET_CAR_YELLOW HAL_GPIO_WritePin(GPIOC, YELLOW_LIGHT_LED_Pin, GPIO_PIN_RESET)
+#define SIG_TOGGLE_CAR_YELLOW HAL_GPIO_TogglePin(GPIOC, YELLOW_LIGHT_LED_Pin)
 
-#define SIG_GET_CAR_GREEN sig_car_green
-#define SIG_SET_CAR_GREEN(value) {sig_car_green = value;}
+#define SIG_GET_CAR_GREEN HAL_GPIO_ReadPin(GPIOA, PED_GREEN_LED_Pin)
+#define SIG_SET_CAR_GREEN HAL_GPIO_WritePin(GPIOA, PED_GREEN_LED_Pin, GPIO_PIN_SET)
+#define SIG_RESET_CAR_GREEN HAL_GPIO_WritePin(GPIOA, PED_GREEN_LED_Pin, GPIO_PIN_RESET)
+#define SIG_TOGGLE_CAR_GREEN HAL_GPIO_TogglePin(GPIOA, PED_GREEN_LED_Pin)
 
 //Pedestrian signals
 #define SIG_GET_PEDESTRIAN_GREEN sig_pedestrian_green
@@ -55,11 +62,10 @@
 #define SIG_SET_PED_GREEN(value) {sig_ped_green = value;}
 
 
-
-
 //DIO
 #define SIG_GET_YYY Dio_ReadChannel(YYY)
 #define SIG_SET_YYY(value) Dio_WriteChannel(value)
+
 
 // Windows application  signal ( keyboard )
 #define SIG_GET_RED_BUTTON Dio_ReadChannel(DIO_B)
