@@ -11,7 +11,11 @@ RM := rm -rf
 -include system/stm32_gcc/subdir.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
+-include Signal/subdir.mk
+-include Scheduler/subdir.mk
 -include PelicanCrossing/subdir.mk
+-include PedestrianSpeaker/subdir.mk
+-include PedestrianRequestLight/subdir.mk
 -include PedestrianAnimationBitMap/subdir.mk
 -include OLED_SSD1306_Driver/subdir.mk
 -include Drivers/STM32L4xx_HAL_Driver/Src/subdir.mk
@@ -37,6 +41,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 Traffic_Light_1.list \
 
+OBJCOPY_BIN += \
+Traffic_Light_1.bin \
+
 
 # All Target
 all: Traffic_Light_1.elf secondary-outputs
@@ -57,12 +64,17 @@ Traffic_Light_1.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+Traffic_Light_1.bin: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "Traffic_Light_1.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
 
 .PHONY: all clean dependents
 .SECONDARY:

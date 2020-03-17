@@ -5,7 +5,7 @@
  *      Author: Pati
  */
 #include <std_types.h>
-#include "stm32l4xx_hal.h"
+
 
 #ifndef SIGNAL_SIG_CFG_H_
 #define SIGNAL_SIG_CFG_H_
@@ -35,26 +35,31 @@
 #define SIG_RESET_CAR_YELLOW HAL_GPIO_WritePin(GPIOC, YELLOW_LIGHT_LED_Pin, GPIO_PIN_RESET)
 #define SIG_TOGGLE_CAR_YELLOW HAL_GPIO_TogglePin(GPIOC, YELLOW_LIGHT_LED_Pin)
 
-#define SIG_GET_CAR_GREEN HAL_GPIO_ReadPin(GPIOA, PED_GREEN_LED_Pin)
-#define SIG_SET_CAR_GREEN HAL_GPIO_WritePin(GPIOA, PED_GREEN_LED_Pin, GPIO_PIN_SET)
-#define SIG_RESET_CAR_GREEN HAL_GPIO_WritePin(GPIOA, PED_GREEN_LED_Pin, GPIO_PIN_RESET)
-#define SIG_TOGGLE_CAR_GREEN HAL_GPIO_TogglePin(GPIOA, PED_GREEN_LED_Pin)
+#define SIG_GET_CAR_GREEN HAL_GPIO_ReadPin(GPIOC, GREEN_LIGHT_LED_Pin)
+#define SIG_SET_CAR_GREEN HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin, GPIO_PIN_SET)
+#define SIG_RESET_CAR_GREEN HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin, GPIO_PIN_RESET)
+#define SIG_TOGGLE_CAR_GREEN HAL_GPIO_TogglePin(GPIOC, GREEN_LIGHT_LED_Pin)
 
 //Pedestrian signals
-#define SIG_GET_PEDESTRIAN_GREEN sig_pedestrian_green
-#define SIG_SET_PEDESTRIAN_GREEN(value) {sig_pedestrian_green = value;}
+#define SIG_GET_PEDESTRIAN_GREEN HAL_GPIO_ReadPin(GPIOA,PED_GREEN_LED_Pin)
+#define SIG_SET_PEDESTRIAN_GREEN HAL_GPIO_WritePin(GPIOA, PED_GREEN_LED_Pin, GPIO_PIN_SET)
+#define SIG_RESET_PEDESTRIAN_GREEN HAL_GPIO_WritePin(GPIOA, PED_GREEN_LED_Pin, GPIO_PIN_RESET)
+#define SIG_TOGGLE_PEDESTRIAN_GREEN HAL_GPIO_TogglePin(GPIOA, PED_GREEN_LED_Pin)
 
-#define SIG_GET_PEDESTRIAN_RED sig_pedestrian_red
-#define SIG_SET_PEDESTRIAN_RED(value) {sig_pedestrian_red = value;}
+#define SIG_GET_PEDESTRIAN_RED HAL_GPIO_ReadPin(GPIOA,PED_RED_LED_Pin)
+#define SIG_SET_PEDESTRIAN_RED HAL_GPIO_WritePin(GPIOA, PED_RED_LED_Pin, GPIO_PIN_SET)
+#define SIG_RESET_PEDESTRIAN_RED HAL_GPIO_WritePin(GPIOA, PED_RED_LED_Pin, GPIO_PIN_RESET)
+#define SIG_TOGGLE_PEDESTRIAN_RED HAL_GPIO_TogglePin(GPIOA, PED_RED_LED_Pin)
 
 #define SIG_GET_PEDESTRIAN_REQUEST sig_pedestrian_request
-#define SIG_SET_PEDESTRIAN_REQUEST(value) {sig_pedestrian_request = value;}
+#define SIG_SET_PEDESTRIAN_REQUEST (value) {sig_pedestrian_request = value;}
+#define SIG_RESET_PEDESTRIAN_REQUEST HAL_GPIO_WritePin(PED_REQUEST_LED_GPIO_Port, PED_REQUEST_LED_Pin, GPIO_PIN_RESET)
 
 #define SIG_GET_PEDESTRIAN_ANIMATION sig_pedestrian_animation
-#define SIG_SET_PEDESTRIAN_ANIMATION(value) {sig_pedestrian_animation = value;)
+#define SIG_SET_PEDESTRIAN_ANIMATION(value) {sig_pedestrian_animation = value;}
 
 #define SIG_GET_PEDESTRIAN_SPEAKER sig_pedestrian_speaker
-#define SIG_SET_PEDESTRIAN_SPEAKER(value) { sig_pedestrian_speaker = value;)
+#define SIG_SET_PEDESTRIAN_SPEAKER(value) { sig_pedestrian_speaker = value;}
 
 //end of Stm32l4xx application signals
 

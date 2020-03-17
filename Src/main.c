@@ -41,6 +41,8 @@
 
 #include <PedestrianAnimation.h>
 
+#include <PedestrianRequestLight.h>
+
 
 /* USER CODE END Includes */
 
@@ -91,7 +93,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -124,7 +125,6 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-	  Sch_Main();
 
     /* USER CODE BEGIN 3 */
   }
@@ -282,7 +282,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GREED_LED_Pin|PED_GREEN_LED_Pin|PED_RED_LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GREED_LED_Pin|GPIO_PIN_9|PED_GREEN_LED_Pin|PED_RED_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin|YELLOW_LIGHT_LED_Pin|RED_LIGHT_LED_Pin, GPIO_PIN_RESET);
@@ -296,8 +296,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(BLUE_BUTTON_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : GREED_LED_Pin PED_GREEN_LED_Pin PED_RED_LED_Pin */
-  GPIO_InitStruct.Pin = GREED_LED_Pin|PED_GREEN_LED_Pin|PED_RED_LED_Pin;
+  /*Configure GPIO pins : GREED_LED_Pin PA9 PED_GREEN_LED_Pin PED_RED_LED_Pin */
+  GPIO_InitStruct.Pin = GREED_LED_Pin|GPIO_PIN_9|PED_GREEN_LED_Pin|PED_RED_LED_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -329,21 +329,11 @@ void Task_10ms(void) {
 };
 
 void PedWalkingAnimation_200ms(void) {
-	if (sig_ped_green == STD_HIGH){
-		PA_SetPedWalking();
-	}
-	else {
-		PA_SetPedStand();
-	}
+	PA_main(SIG_GET_PEDESTRIAN_ANIMATION);
 }
 
 void PedestrianLight_Task_500ms(void) {
-	if(sig_pedestrian_request == STD_HIGH){
-		HAL_GPIO_TogglePin(GPIOB, PED_REQUEST_LED_Pin);
-	}
-	else {
-		HAL_GPIO_WritePin(GPIOB, PED_REQUEST_LED_Pin, GPIO_PIN_RESET);
-	}
+	PRL_main(SIG_GET_PEDESTRIAN_REQUEST);
 };
 
 void CarTrafficLight_Task_1000ms(void) {
@@ -434,7 +424,7 @@ void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(char *file, uint32_t line)
+void assert_failed(uint8_t *file, uint32_t line)
 { 
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,

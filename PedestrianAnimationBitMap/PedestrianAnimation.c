@@ -7,9 +7,9 @@
 
 #include <ssd1306.h>
 #include <Ped_Animation_Bitmaps.h>
+#include <std_types.h>
 
 #include <PedestrianAnimation.h>
-
 
 void PA_SetPedWalking(void) {
 	SSD1306_Clear();
@@ -74,4 +74,17 @@ void PA_SetPedStand(void) {
 	SSD1306_Clear();
 	SSD1306_DrawBitmap(0, 0, Ped_stop, 128, 64, 1);
 	SSD1306_UpdateScreen();
+}
+
+void PA_Init(){
+
+}
+
+void PA_main(uint8_t sig_pedestrian_animation){
+	if (sig_pedestrian_animation == STD_HIGH) {
+		PA_SetPedWalking();
+	}
+	else {
+		PA_SetPedStand();
+	}
 }
