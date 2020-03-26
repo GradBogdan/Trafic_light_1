@@ -23,25 +23,19 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <sig_cfg.h>
-
 #include <sch.h>
 #include <sch_cfg.h>
+
+#include <sig_cfg.h>
 
 #include <sys_timer.h>
 #include <sys_button.h>
 
-#include <std_types.h>
-
-#include <sig_cfg.h>
-
-#include <CarLight.h>
-
-#include <ssd1306.h>
-
 #include <PedestrianAnimation.h>
 
 #include <PedestrianRequestLight.h>
+
+#include <PelicanCrossing.h>
 
 
 /* USER CODE END Includes */
@@ -101,6 +95,8 @@ int main(void)
 
   /* USER CODE BEGIN Init */
   Sch_Init(&Sch_Cfg);
+  PC_Init();
+  PA_Init();
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -125,7 +121,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  Sch_Main();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -282,26 +278,19 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GREED_LED_Pin|GPIO_PIN_9|PED_GREEN_LED_Pin|PED_RED_LED_Pin, GPIO_PIN_RESET);
-
-  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GREEN_LIGHT_LED_Pin|YELLOW_LIGHT_LED_Pin|RED_LIGHT_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(PED_REQUEST_LED_GPIO_Port, PED_REQUEST_LED_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, PED_GREEN_LED_Pin|PED_RED_LED_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : BLUE_BUTTON_Pin */
   GPIO_InitStruct.Pin = BLUE_BUTTON_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(BLUE_BUTTON_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : GREED_LED_Pin PA9 PED_GREEN_LED_Pin PED_RED_LED_Pin */
-  GPIO_InitStruct.Pin = GREED_LED_Pin|GPIO_PIN_9|PED_GREEN_LED_Pin|PED_RED_LED_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : GREEN_LIGHT_LED_Pin YELLOW_LIGHT_LED_Pin RED_LIGHT_LED_Pin */
   GPIO_InitStruct.Pin = GREEN_LIGHT_LED_Pin|YELLOW_LIGHT_LED_Pin|RED_LIGHT_LED_Pin;
@@ -316,6 +305,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(PED_REQUEST_LED_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : PED_GREEN_LED_Pin PED_RED_LED_Pin */
+  GPIO_InitStruct.Pin = PED_GREEN_LED_Pin|PED_RED_LED_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 1, 0);
@@ -337,68 +333,8 @@ void PedestrianLight_Task_500ms(void) {
 };
 
 void CarTrafficLight_Task_1000ms(void) {
-	static uint8_t CL_state_count;//time in seconds spent in each state
-	static uint8_t CL_cycle_count;//time in sescond for one traffic light cycle (red->yellow->green)
-	CL_cycle_count++;
-	if(sig_pedestrian_request == STD_HIGH && CL_cycle_count >=40){
-		CL_state = CL_YELLOW;
-		CL_state_count= 0;
-		CL_cycle_count = 0;
-		sig_pedestrian_request = STD_LOW;
-	};
-	switch(CL_state){
-		case CL_RED :
-			if (CL_state_count <=5) {
-				CL_SetLightColor(CL_state);
-				CL_state_count = CL_state_count+1;
-				SIG_SET_PED_GREEN(STD_HIGH);
-			}
-			else {
-				CL_state = CL_FLASH_RED;
-				CL_state_count =0;
-			}
-			break;
-		case CL_FLASH_RED :
-			if(CL_state_count <=3) {
-				CL_SetLightColor(CL_state);
-				CL_state_count = CL_state_count+1;
-			}
-			else {
-				CL_state = CL_GREEN;
-				CL_state_count =0;
-			}
-			break;
-		case CL_YELLOW :
-			if (CL_state_count <=2) {
-				CL_SetLightColor(CL_state);
-				CL_state_count = CL_state_count+1;
-			}
-			else {
-				CL_state = CL_RED;
-				CL_state_count =0;
-			}
-			break;
-		case CL_GREEN :
-			if (CL_state_count <=5) {
-				CL_SetLightColor(CL_state);
-				CL_state_count = CL_state_count+1;
-				SIG_SET_PED_GREEN(STD_LOW);
-			}
-			else {
-				CL_state = CL_DEFAULT_GREEN;
-				CL_state_count =0;
-			}
-			break;
-		case CL_DEFAULT_GREEN :
-				CL_SetLightColor(CL_state);
-				SIG_SET_PED_GREEN(STD_LOW);
+	PC_Main();
 
-			break;
-
-		default :
-			CL_state = CL_DEFAULT_GREEN;
-			break;
-	};
 };
 
 

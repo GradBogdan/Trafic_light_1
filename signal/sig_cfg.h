@@ -5,6 +5,7 @@
  *      Author: Pati
  */
 #include <std_types.h>
+#include <main.h>
 
 
 #ifndef SIGNAL_SIG_CFG_H_
@@ -52,8 +53,9 @@
 #define SIG_TOGGLE_PEDESTRIAN_RED HAL_GPIO_TogglePin(GPIOA, PED_RED_LED_Pin)
 
 #define SIG_GET_PEDESTRIAN_REQUEST sig_pedestrian_request
-#define SIG_SET_PEDESTRIAN_REQUEST (value) {sig_pedestrian_request = value;}
-#define SIG_RESET_PEDESTRIAN_REQUEST HAL_GPIO_WritePin(PED_REQUEST_LED_GPIO_Port, PED_REQUEST_LED_Pin, GPIO_PIN_RESET)
+#define SIG_SET_PEDESTRIAN_REQUEST(value) {sig_pedestrian_request = value;}
+#define SIG_RESET_PEDESTRIAN_REQUEST HAL_GPIO_WritePin(GPIOB, PED_REQUEST_LED_Pin, GPIO_PIN_RESET)
+#define SIG_TOGGLE_PEDESTRIAN_REQUEST HAL_GPIO_TogglePin(GPIOB, PED_REQUEST_LED_Pin)
 
 #define SIG_GET_PEDESTRIAN_ANIMATION sig_pedestrian_animation
 #define SIG_SET_PEDESTRIAN_ANIMATION(value) {sig_pedestrian_animation = value;}
@@ -99,6 +101,9 @@ extern uint8_t sig_pedestrian_green;
 extern uint8_t sig_pedestrian_red;
 extern uint8_t sig_pedestrian_animation;
 extern uint8_t sig_pedestrian_speaker;
+
+extern uint8_t CL_state_count;//time in seconds spent in each state
+extern uint8_t CL_cycle_count;//time in sescond for one traffic light cycle (red->yellow->green)
 
 
 extern uint8_t sig_pedestrian_request;
