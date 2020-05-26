@@ -16,7 +16,7 @@
  * type for TrafficLight States
  */
 typedef enum{
-	CL_RED, CL_YELLOW, CL_GREEN, CL_FLASH_RED, CL_DEFAULT_GREEN
+	CL_CAR_RED, CL_CAR_YELLOW, CL_CAR_GREEN, CL_CAR_STREET_PREPARATION, CL_CAR_GREEN_WAIT_PED_REQ
 }trafficLightState_t;
 
 #endif /* STD_TYPES_H_ */

@@ -25,6 +25,10 @@
 #define SIG_SET_LIGHT(value) {sig_light = value;}
 
 //Start of Stm32l4xx application signals
+//PelicanCrossing Status signal
+#define SIG_GET_PELICAN_CROSS_TIMER pelicanCross_timer
+#define SIG_SET_PELICAN_CORSS_TIMER(value) {pelicanCross_timer = value;}
+
 //Car signals
 #define SIG_GET_CAR_RED HAL_GPIO_ReadPin(GPIOC, RED_LIGHT_LED_Pin)
 #define SIG_SET_CAR_RED HAL_GPIO_WritePin(GPIOC, RED_LIGHT_LED_Pin, GPIO_PIN_SET)
@@ -85,13 +89,14 @@
 #define SIG_SET_GREEN_BUTTON(value) Dio_WriteChannel(value)
 
 
-
 //Generic
 extern uint16_t sig_xxx;
 
 // // Windows application  signal ( keyboard )
-
 extern uint8_t sig_red_light;
+
+//PelicanCrossing Timer
+extern uint8_t pelicanCross_timer;
 
 //Stm32l4xx application
 extern uint8_t sig_car_red;

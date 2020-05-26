@@ -1,0 +1,68 @@
+
+# 1. SYSTEM
+- **Lights device for cars contains:** 
+     
+  - 1 x GREEN color LED
+  - 1 x YELLOW color LED
+  - 1 x RED color LED
+  
+- **Pedestrian Devices contains:** 
+       
+  - 1 x lights device with:
+  
+       - 1 x RED color LED
+       - 1 x GREEN color LED
+    
+  - 1 x OLED DISPLAY 
+
+  - 1 x Pedestrian REQUEST BUTTON
+
+  - 1 x Pedestrian WAITING SIGNALING
+ 
+       - 1 X YELLOW color LED
+
+  - 1 x Pedestrian SPEAKER FOR BLIND PEOPLE
+
+# 2. SYSTEM BEHAVIOR 
+ 
+- **Behavior for CARS lights device:**
+
+  - **CAR GREEN** - turn ON the GREEN color LED (car) for 20 s
+  - **CAR YELLOW** - turn ON the YELLOW color LED (car) for 5 s
+  - **CAR RED** - turn ON the RED color LED for 20 s 
+  - **FLASH YELLOW** - toggles the YELLOW color LED (car) every 0.5 s 
+  
+- **Behavior for PEDESTRIAN devices:**
+
+  - **Pedestrian lights devices:**
+
+      - **PEDESTRIAN RED** - turn ON the RED color LED (pedestrian) for 20 s
+      - **PEDESTRIAN GREEN** - turn ON the GREEN color LED (pedestrian) for 20 s
+      
+   - **OLED DISPLAY**
+
+        - **Walking animation** - display on the OLED DISPLAY a walking animation when the PEDESTRIAN GREEN is ON
+        - **Stand animation** - display on the OLED DISPLAY a stand animation when the PEDESTRIAN RED is ON   
+        
+    - **Pedestrian REQUEST BUTTON**
+
+        - When the **request button** is pressed it must start the WAITING SIGNALING
+
+    - **Pedestrian WAITING SIGNALING**
+
+        - **PEDESTRIAN REQUEST LIGHT** – toggles the YELLOW color LED (request) every 0.5 s
+        
+    - **Pedestrian SPEAKER FOR BLIND PEOPLE**
+
+        - **Pedestrian speaker** – generates a sound every 0.2 s when PEDESTRIAN GREEN is ON
+  
+# 3. FEATURES
+
+- The traffic light system must have two states **ON** and **OFF**
+- The system must be turned **ON** with an external signal
+- **ON STATE**-system must follow the traffic cycle
+- **OFF STATE**–toggles the CAR YELLOW every 0.5 s
+
+# 4. STARTING CONDITIONS
+
+- Traffic light system start in OFF state then. After the external signal occurs it goes in ON state. 

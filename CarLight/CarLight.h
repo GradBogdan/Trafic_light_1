@@ -10,7 +10,7 @@
 
 #include <std_types.h>
 
-static trafficLightState_t CL_state = CL_DEFAULT_GREEN;
+static trafficLightState_t CL_state = CL_CAR_GREEN_WAIT_PED_REQ;
 
 trafficLightState_t CL_Init(trafficLightState_t CL_state);
 void CL_SetLightColor(trafficLightState_t CL_state);

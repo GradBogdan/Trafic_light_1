@@ -28,4 +28,9 @@ void Sys_TimerHandler(void);
  */
 uint32_t Sys_GetTimer(void);
 
+/*this function returns the PelicanCrossing time in seconds
+ *
+ */
+uint16_t Sys_GetCounter(void);
+
 #endif /* SYS_TIMER_H_ */

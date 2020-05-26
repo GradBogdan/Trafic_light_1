@@ -24,6 +24,8 @@ uint8_t sig_pedestrian_red;
 uint8_t sig_pedestrian_animation;
 uint8_t sig_pedestrian_speaker;
 
+uint8_t pelicanCross_timer;
+
 uint8_t CL_state_count;
 uint8_t CL_cycle_count;
 

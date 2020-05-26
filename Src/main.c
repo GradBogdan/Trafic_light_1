@@ -37,6 +37,7 @@
 
 #include <PelicanCrossing.h>
 
+#include <ssd1306.h>
 
 /* USER CODE END Includes */
 
@@ -94,6 +95,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  SSD1306_Init();
   Sch_Init(&Sch_Cfg);
   PC_Init();
   PA_Init();
@@ -111,8 +113,6 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-
-  SSD1306_Init();
 
   /* USER CODE END 2 */
 
@@ -320,8 +320,8 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void Task_10ms(void) {
-
+void Counter_Task_100ms(void) {
+	Sys_GetCounter();
 };
 
 void PedWalkingAnimation_200ms(void) {
@@ -334,7 +334,6 @@ void PedestrianLight_Task_500ms(void) {
 
 void CarTrafficLight_Task_1000ms(void) {
 	PC_Main();
-
 };
 
 
