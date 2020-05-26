@@ -11,9 +11,9 @@
 
 extern Sch_Cfg_Type Sch_Cfg;
 
-void CarTrafficLight_Task_1000ms(void);
+void CarTrafficLight_Task_500ms(void);
 void PedestrianLight_Task_500ms(void);
-void Counter_Task_100ms(void);
+void Counter_Task_1000ms(void);
 void PedWalkingAnimation_200ms(void);
 
 #endif /* SCH_CFG_H_ */

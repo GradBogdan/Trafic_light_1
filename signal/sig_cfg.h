@@ -96,6 +96,7 @@ extern uint16_t sig_xxx;
 extern uint8_t sig_red_light;
 
 //PelicanCrossing Timer
+extern uint8_t pelicanCross_counter;
 extern uint8_t pelicanCross_timer;
 
 //Stm32l4xx application

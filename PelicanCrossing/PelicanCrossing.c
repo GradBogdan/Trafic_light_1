@@ -14,7 +14,7 @@ void PC_Init(){
 }
 
 void PC_Main(){
-	if(SIG_GET_PEDESTRIAN_REQUEST == STD_HIGH && CL_cycle_count >=40){
+	if(SIG_GET_PEDESTRIAN_REQUEST == STD_HIGH && SIG_GET_PELICAN_CROSS_TIMER >=20){
 		CL_state = CL_CAR_YELLOW;
 		SIG_SET_PEDESTRIAN_REQUEST(STD_LOW);
 	};
@@ -52,7 +52,6 @@ void PC_Main(){
 		case CL_CAR_GREEN :
 			if (SIG_GET_PELICAN_CROSS_TIMER <=5) {
 				CL_SetLightColor(CL_state);
-				CL_state_count = CL_state_count+1;
 				SIG_SET_PEDESTRIAN_ANIMATION(STD_LOW);
 			}
 			else {

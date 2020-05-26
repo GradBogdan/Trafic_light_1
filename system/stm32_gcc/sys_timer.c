@@ -14,11 +14,7 @@
 uint32_t Sys_GetTimer(void) {
     return HAL_GetTick();
 }
-uint16_t Sys_GetCounter(void){
-	uint8_t counter = 0;
-	counter++;
-	if(counter==10){
+void Sys_GetCounter(void){
 		pelicanCross_timer++;
 	}
-}
 

@@ -95,7 +95,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  SSD1306_Init();
+
   Sch_Init(&Sch_Cfg);
   PC_Init();
   PA_Init();
@@ -113,6 +113,8 @@ int main(void)
   MX_USART2_UART_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
+
+  SSD1306_Init();
 
   /* USER CODE END 2 */
 
@@ -320,7 +322,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void Counter_Task_100ms(void) {
+void Counter_Task_1000ms(void) {
 	Sys_GetCounter();
 };
 
@@ -332,7 +334,7 @@ void PedestrianLight_Task_500ms(void) {
 	PRL_main(SIG_GET_PEDESTRIAN_REQUEST);
 };
 
-void CarTrafficLight_Task_1000ms(void) {
+void CarTrafficLight_Task_500ms(void) {
 	PC_Main();
 };
 

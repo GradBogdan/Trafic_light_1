@@ -11,9 +11,9 @@
 
 static Sch_Task_Type tasks[] = {
     {
-        100,        //interval in milliseconds
-        0,           // offset: set equal to interval so the task is called on the first recurrence milliseconds
-        Counter_Task_100ms  //Task container; implement in your application
+        1000,        //interval in milliseconds
+        17,           // offset: set equal to interval so the task is called on the first recurrence milliseconds
+        Counter_Task_1000ms  //Task container; implement in your application
     },
     {
         200,          //interval in milliseconds
@@ -26,9 +26,9 @@ static Sch_Task_Type tasks[] = {
 		PedestrianLight_Task_500ms		//Task container; implement in your application
 	},
 	{
-		1000, 		//interval in milliseconds
+		500, 		//interval in milliseconds
 		0,			 // offset: set equal to interval so the task is called on the first recurrence milliseconds
-		CarTrafficLight_Task_1000ms		//Task container; implement in your application
+		CarTrafficLight_Task_500ms		//Task container; implement in your application
 	}
 };
 /* End of Configuration - edit to add new tasks */
